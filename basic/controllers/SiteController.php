@@ -74,21 +74,39 @@ class SiteController extends Controller
     public function actionLogin($actor)
     {
         if(!empty(Yii::$app->request->post())){
+            $form = new LoginForm($actor);
+            $data = Yii::$app->request->post();
+            $form -> load($data);
             try {
-                if($actor == 'logopedista') $model = new \app\models\LogopedistaModel();
-                else if($actor == 'utente') $model = new \app\models\UtenteModel();
-                else if($actor == 'caregiver') $model = new \app\models\CaregiverModel();
-                else Yii::error("forse hai sbagliato lavoro");
-                $model->load(Yii::$app->request->post());
-                $model->insert();
+                if(($actor == 'logopedista')){
+                    $form->login();
+                    $cookie_name = "logopedista";
+                    $cookie_value = $data['LoginForm']['mail'];
+                    setcookie($cookie_name, $cookie_value, 0, "/");
+                    //$this->redirect('/logopedista/dashboardlogopedista?tipoAttore=');
+                } elseif(($actor == 'utente')){
+                    $form->login();
+                    $cookie_name = "utente";
+                    $cookie_value = $data['LoginForm']['mail'];
+                    setcookie($cookie_name, $cookie_value, 0, "/");
+                    //$this->redirect('/logopedista/dashboardlogopedista?tipoAttore=');
+                } elseif(($actor == 'caregiver')){
+                    $form->login();
+                    $cookie_name = "caregiver";
+                    $cookie_value = $data['LoginForm']['mail'];
+                    setcookie($cookie_name, $cookie_value, 0, "/");
+                    //$this->redirect('/logopedista/dashboardlogopedista?tipoAttore=');
+                } else Yii::error("forse hai sbagliato lavoro");
 
-                return $this->render('@app/views/site/about');
+
+
             } catch(\Exception $e) {
                 Yii::error();
             }
         }
-
-        return $this->render('register', ['actor'=>$actor]);
+        return $this->render('login', [
+            'model' => $form,
+        ]);
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {

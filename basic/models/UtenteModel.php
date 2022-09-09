@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "utente".
@@ -15,7 +16,7 @@ use Yii;
  *
  * @property Caregiver[] $caregivers
  */
-class UtenteModel extends \yii\db\ActiveRecord
+class UtenteModel extends \yii\db\ActiveRecord implements IdentityInterface
 {
     /**
      * {@inheritdoc}
@@ -61,5 +62,33 @@ class UtenteModel extends \yii\db\ActiveRecord
     public function getCaregivers()
     {
         return $this->hasMany(Caregiver::class, ['utenteAss' => 'mail']);
+    }
+
+    public static function findIdentity($id)
+    {
+        return self::findOne($id);
+    }
+    /**
+     * @throws NotSupportedException
+     */
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        throw new NotSupportedException();
+    }
+    public function getId()
+    {
+        return $this->mail;
+    }
+    public function getAuthKey()
+    {
+        return null;//$this->authKey;
+    }
+    public function validateAuthKey($authKey)
+    {
+        throw new NotSupportedException();
+//return $this->authKey == $authKey;
+    }
+    public static function findByMail($mail){
+        return self::findOne(['mail' => $mail]);
     }
 }

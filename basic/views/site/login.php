@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($model, 'password')->passwordInput() ?>
 
+        <?= $actorType = $form->field($model, $actor) ->hiddenInput(['value' => $actor])->label(false); ?>
 
         <div class="form-group">
             <div class="offset-lg-1 col-lg-11">
