@@ -17,6 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>Please fill out the following fields to login:</p>
 
     <?php $actor = $_GET['actor'];
+
+    echo $actor;
+
     $form = ActiveForm::begin([
         'id' => 'login-form',
         'layout' => 'horizontal',
@@ -26,13 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'inputOptions' => ['class' => 'col-lg-3 form-control'],
             'errorOptions' => ['class' => 'col-lg-7 invalid-feedback'],
         ],
-    ]); ?>
+    ]);
 
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+        echo $form->field($model, 'mail')->textInput(['autofocus' => true]);
 
-        <?= $form->field($model, 'password')->passwordInput() ?>
+        echo $form->field($model, 'password')->passwordInput();
 
-        <?= $actorType = $form->field($model, $actor) ->hiddenInput(['value' => $actor])->label(false); ?>
+        echo $actorType = $form->field($model, 'actor') ->hiddenInput(['value' => $actor])->label(false); ?>
 
         <div class="form-group">
             <div class="offset-lg-1 col-lg-11">

@@ -17,7 +17,7 @@ class LoginForm extends Model
 {
     public $mail;
     public $password;
-    public $actor = '';
+    public $actor;
     private $_user = false;
 
 
@@ -29,7 +29,7 @@ class LoginForm extends Model
     {
         return [
             // username and password are both required
-            [['mail', 'password'], 'required'],
+            [['mail', 'password','actor'], 'required'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
         ];
@@ -73,14 +73,14 @@ class LoginForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            if ($actor == "logopedista"){
+            if ($this->actor == "logopedista"){
                 $this->_user = LogopedistaModel::findByMail($this->mail);
-            } elseif ($actor == "caregiver"){
+            } elseif ($this->actor == "caregiver"){
                 $this->_user = CaregiverModel::findByMail($this->mail);
-            } elseif ($actor == "utente"){
+            } elseif ($this->actor == "utente"){
                 $this->_user = UtenteModel::findByMail($this->mail);
             }
-            $this->_user = User::findByMail($this->mail);
+            $this->_user = NULL;
         }
 
         return $this->_user;

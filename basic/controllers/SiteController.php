@@ -73,49 +73,46 @@ class SiteController extends Controller
      */
     public function actionLogin($actor)
     {
+        $form = new LoginForm();
         if(!empty(Yii::$app->request->post())){
-            $form = new LoginForm($actor);
             $data = Yii::$app->request->post();
+
+            Yii::error($data);
+
             $form -> load($data);
+
+            Yii::error($form->getAttributes());
+
             try {
-                if(($actor == 'logopedista')){
+                if($actor == 'logopedista'){
                     $form->login();
                     $cookie_name = "logopedista";
                     $cookie_value = $data['LoginForm']['mail'];
                     setcookie($cookie_name, $cookie_value, 0, "/");
-                    //$this->redirect('/logopedista/dashboardlogopedista?tipoAttore=');
-                } elseif(($actor == 'utente')){
+                    $this->redirect('/logopedista/dashboardlogopedista');
+                } elseif($actor == 'utente'){
                     $form->login();
                     $cookie_name = "utente";
                     $cookie_value = $data['LoginForm']['mail'];
                     setcookie($cookie_name, $cookie_value, 0, "/");
-                    //$this->redirect('/logopedista/dashboardlogopedista?tipoAttore=');
-                } elseif(($actor == 'caregiver')){
+                    $this->redirect('/utente/dashboardutente');
+                } elseif($actor == 'caregiver'){
                     $form->login();
                     $cookie_name = "caregiver";
                     $cookie_value = $data['LoginForm']['mail'];
                     setcookie($cookie_name, $cookie_value, 0, "/");
-                    //$this->redirect('/logopedista/dashboardlogopedista?tipoAttore=');
-                } else Yii::error("forse hai sbagliato lavoro");
+                    $this->redirect('/caregiver/dashboardcaregiver');
+                } else Yii::error("Forse hai sbagliato lavoro");
 
 
 
             } catch(\Exception $e) {
-                Yii::error();
+                Yii::error($e);
             }
         }
         return $this->render('login', [
             'model' => $form,
-        ]);
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-
-        $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
+            'actor' => $actor
         ]);
     }
 
@@ -126,7 +123,12 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
-        Yii::$app->user->logout();
+        if (isset($_COOKIE['caregiver']))
+            setcookie('caregiver', time() - 3600);
+        if (isset($_COOKIE['utente']))
+            setcookie('utente', time() - 3600);
+        if (isset($_COOKIE['logopedista']))
+            setcookie('logopedista', time() - 3600);
 
         return $this->goHome();
     }
@@ -170,9 +172,11 @@ class SiteController extends Controller
                 $model->load(Yii::$app->request->post());
                 $model->insert();
 
-                return $this->render('@app/views/site/about');
+                Yii::error(Yii::$app->request->post());
+
+                //return $this->render('@app/views/site/about');
             } catch(\Exception $e) {
-                Yii::error();
+                Yii::error("Errore non specificato");
             }
         }
 
