@@ -12,4 +12,9 @@ echo "<h1>Piacere di rivederti, " . $_COOKIE['logopedista'] . $actor . "</h1>";
 ?>
 <div class="form-group">
 
+    <?php
+        $mail = $_COOKIE['logopedista'];
+        echo Html::a('Visualizza Appuntamenti da Confermare',['/prenotazione/vistaprenotazioni?actor=logopedista']);
+    ?>
+
 </div>

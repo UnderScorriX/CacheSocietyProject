@@ -93,6 +93,7 @@
       <excludeFolder url="file://$MODULE_DIR$/basic/vendor/fakerphp/faker" />
       <excludeFolder url="file://$MODULE_DIR$/basic/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/basic/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/basic/vendor/kartik-v/yii2-widget-timepicker" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

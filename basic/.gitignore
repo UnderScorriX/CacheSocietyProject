@@ -34,3 +34,5 @@ tests/_support/_generated
 
 #vagrant folder
 /.vagrant
+
+/cachesociety-itps-21-22/

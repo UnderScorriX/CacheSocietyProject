@@ -11,8 +11,5 @@ class LogopedistaController extends Controller
         return $this->render('dashboardlogopedista', ['actor'=>'logopedista']);
     }
 
-    public function actionVistaappuntamento() {
-        $this->layout = 'logopedista';
-        return $this->render('appuntamento/vistaappuntamento', ['actor'=>'logopedista']);
-    }
+
 }

@@ -80,7 +80,7 @@ class LoginForm extends Model
             } elseif ($this->actor == "utente"){
                 $this->_user = UtenteModel::findByMail($this->mail);
             }
-            $this->_user = NULL;
+            //$this->_user = NULL;
         }
 
         return $this->_user;
