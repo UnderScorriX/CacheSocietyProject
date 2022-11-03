@@ -15,7 +15,6 @@ use yii\web\IdentityInterface;
  * @property string|null $utenteAss
  * @property string|null $password
  *
- * @property Utente $utenteAss0
  */
 class CaregiverModel extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -37,8 +36,7 @@ class CaregiverModel extends \yii\db\ActiveRecord implements IdentityInterface
             [['dataNascita'], 'safe'],
             [['mail', 'nome', 'cognome', 'utenteAss'], 'string', 'max' => 50],
             [['password'], 'string', 'max' => 25],
-            [['mail'], 'unique'],
-            [['utenteAss'], 'exist', 'skipOnError' => true, 'targetClass' => Utente::class, 'targetAttribute' => ['utenteAss' => 'mail']],
+            [['mail'], 'unique']
         ];
     }
 
@@ -57,15 +55,7 @@ class CaregiverModel extends \yii\db\ActiveRecord implements IdentityInterface
         ];
     }
 
-    /**
-     * Gets query for [[UtenteAss0]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUtenteAss0()
-    {
-        return $this->hasOne(Utente::class, ['mail' => 'utenteAss']);
-    }
+
     public static function findIdentity($id)
     {
         return self::findOne($id);

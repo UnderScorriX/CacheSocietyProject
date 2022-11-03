@@ -14,6 +14,8 @@ echo "<h1>Piacere di rivederti, " . $_COOKIE['caregiver'] . "</h1>";
 
     <?php
     echo Html::a('Passa alla schermata per prenotare una seduta',['/prenotazione/vistaprenotazioni?actor=caregiver']);
+    echo Html::a('Passa alla schermata per collegare il tuo account ad un logopedista',['vistaassociazionelogopedista']);
+
     ?>
 
 </div>

@@ -13,8 +13,8 @@ use yii\web\IdentityInterface;
  * @property string $cognome
  * @property string|null $dataNascita
  * @property string|null $password
+ * @property string|null $logopedista
  *
- * @property Caregiver[] $caregivers
  */
 class UtenteModel extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -54,15 +54,11 @@ class UtenteModel extends \yii\db\ActiveRecord implements IdentityInterface
         ];
     }
 
-    /**
-     * Gets query for [[Caregivers]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCaregivers()
+
+    /*public function getCaregivers()
     {
         return $this->hasMany(Caregiver::class, ['utenteAss' => 'mail']);
-    }
+    }*/
 
     public static function findIdentity($id)
     {
