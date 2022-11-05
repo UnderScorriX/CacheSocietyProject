@@ -6,12 +6,16 @@
 /** @var $mail string */
 /** @var $dataProvider yii\data\ActiveDataProvider */
 
+use app\models\CaregiverModel;
 use app\models\PrenotazioneModel;
+use app\models\UtenteModel;
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
 use yii\grid\GridView;
 use yii\grid\ActionColumn;
 use kartik\date\DatePicker;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 
 $this->title = 'Appuntamenti';
@@ -22,43 +26,46 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php
 
-    Yii::error($actor);
     if ($actor == "logopedista"){
-        try {
-            echo GridView::widget([
-                'dataProvider' => $dataProvider,
-                'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
+            try {
+                echo GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'columns' => [
+                        ['class' => 'yii\grid\SerialColumn'],
+                        'data',
+                        'ora',
+                        'mailUtente',
+                        'mailCaregiver',
+                        [
+                            'class' => ActionColumn::className(),
+                            'header' => 'Conferma appuntamento',
+                            'visibleButtons' => [
+                                'view' => false,
+                                'delete' => false,
+                                'update' => true
+                            ],
+                            'urlCreator' => function ($action, $model, $key, $index, $column) {
+                                $url = $action;
 
-                    'dataAppuntamento',
-                    'oraAppuntamento',
-                    'utente',
-                    'caregiver',
-                    [
-                        'class' => ActionColumn::className(),
-                        'visibleButtons' => [
-                            'delete' => false,
-                            'update' => false
-                        ],
-                        'urlCreator' => function ($action, PrenotazioneModel $model, $key, $index, $column) {
-                            $url = $action;
-
-                            if ($action == 'view') {
-                                $url = 'dettagliappuntamento';
-                            } else if ($action == 'update') {
-                                $url = 'aggiornaappuntamento';
-                            } else if ($action == 'delete') {
-                                $url = 'delete';
+                                if ($action == 'update') {
+                                    $url = 'vistaprenotazioni';
+                                }
+                                return Url::toRoute([$url,
+                                    'actor' => 'logopedista',
+                                    'data' => $model['data'],
+                                    'ora' => $model['ora'],
+                                    'mailUtente' => $model['mailUtente'],
+                                    'mailCaregiver' => $model['mailCaregiver']
+                                ]);
                             }
-                            return Url::toRoute([$url, 'dataAppuntamento' => $model->dataAppuntamento, 'oraAppuntamento' => $model->oraAppuntamento, 'logopedista' => $model->logopedista]);
-                        }
+                        ],
                     ],
-                ],
-            ]);
-        } catch (Exception $e) {
-            echo '<h2> Non sono presenti appuntamenti richiesti dai caregiver</h2>';
-        }
-
+                ]);
+            } catch (Exception $e) {
+                echo '<h2> Non sono presenti appuntamenti richiesti dai caregiver</h2>';
+                Yii::error($e);
+            }
+            echo Html::a('Torna alla dashboard', ['/logopedista/dashboardlogopedista'], ['class' => 'btn btn-outline-primary']);
     } else if ($actor == "caregiver"){
 
         $form = ActiveForm::begin();
@@ -94,10 +101,55 @@ $this->params['breadcrumbs'][] = $this->title;
 
         echo $caregiver;
 
+        $caregivers = ArrayHelper::toArray(CaregiverModel::find()
+            ->select(['utenteAss'])
+            ->where(['mail' => $_COOKIE['caregiver']])
+            ->all());
+
+        $utenteAssociato = CaregiverModel::find()->select('utenteAss')->where(['mail' => $_COOKIE['caregiver']])->one();
+
+        $utente = $form->field($model, 'mailUtente')
+            ->hiddenInput(['value' => $utenteAssociato['utenteAss']])->label(false);
+
+        echo $utente;
+
+        $logopedistaAssociato = UtenteModel::find()->select('logopedista')->where(['mail' => $utenteAssociato['utenteAss']])->one();
+
+        $logopedista = $form->field($model, 'mailLogopedista')
+            ->hiddenInput(['value' => $logopedistaAssociato['logopedista']])->label(false);
+
+        echo $logopedista;
+
         echo Html::submitButton('Richiedi prenotazione', ['class' => 'btn btn-success']);
 
         ActiveForm::end();
-    } else {
 
+        echo "<br><p>Le tue attuali prenotazioni:</p>";
+
+        try {
+            echo GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+                    'data',
+                    'ora',
+                    'mailUtente',
+                    'mailLogopedista',
+                    [
+                        'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default
+                        'value' => function ($model) {
+                            if($model['conferma'] == 0)
+                                return "Non confermata";
+                            return "Confermata";
+                        },
+                    ],
+                ],
+            ]);
+        } catch (Exception $e) {
+            echo '<h2> Non sono presenti appuntamenti da te richiesti</h2>';
+            Yii::error($e);
+        }
+    } else {
+        //IDK
     }
     ?>

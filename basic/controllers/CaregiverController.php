@@ -41,12 +41,9 @@ class CaregiverController extends Controller
             ->where(['mail' => $_COOKIE['caregiver']])
             ->all());
 
-        $query = UtenteModel::find();
-        $uts = null;
-        foreach($uts as $ut){
-            $query->orWhere(['like','mail', $caregivers]);
-        }
-        $utenti =ArrayHelper::toArray($query->all());
+        $query = UtenteModel::find()->orWhere(['like','mail', $caregivers[0]]);
+
+        $utenti = $query->all();
 
         Yii::error($utenti);
 

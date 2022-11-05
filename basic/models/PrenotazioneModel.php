@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "appuntamento".
+ * This is the model class for table "prenotazione".
  *
  * @property int $id
  * @property string $data
@@ -24,7 +24,7 @@ class PrenotazioneModel extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'appuntamento';
+        return 'prenotazione';
     }
 
     /**
@@ -95,5 +95,9 @@ class PrenotazioneModel extends \yii\db\ActiveRecord
     public function getMailUtente0()
     {
         return $this->hasOne(UtenteModel::class, ['mail' => 'mailUtente']);
+    }
+
+    public static function findByID($id){
+        return self::findOne(['id' => $id]);
     }
 }

@@ -12,10 +12,20 @@ echo "<h1>Piacere di rivederti, " . $_COOKIE['caregiver'] . "</h1>";
 ?>
 <div class="form-group">
 
-    <?php
-    echo Html::a('Passa alla schermata per prenotare una seduta',['/prenotazione/vistaprenotazioni?actor=caregiver']);
-    echo Html::a('Passa alla schermata per collegare il tuo account ad un logopedista',['vistaassociazionelogopedista']);
+    <br><div class="body-content">
 
-    ?>
+        <div class="row">
+            <div class="col text-center">
+                <p>Passa alla schermata per prenotare una seduta</p>
+                <p><a class="btn btn-primary" href="/prenotazione/vistaprenotazioni?actor=caregiver">Prenota</a></p>
+            </div>
+
+            <div class="col text-center">
+                <p>Passa alla schermata per collegare il tuo account ad un logopedista</p>
+                <p><a class="btn btn-primary" href="/caregiver/vistaassociazionelogopedista">Associa</a></p>
+            </div>
+        </div>
+
+    </div>
 
 </div>

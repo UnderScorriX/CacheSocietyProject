@@ -67,18 +67,21 @@ class CaregiverModel extends \yii\db\ActiveRecord implements IdentityInterface
     {
         throw new NotSupportedException();
     }
+
     public function getId()
     {
         return $this->mail;
     }
+
     public function getAuthKey()
     {
         return null;//$this->authKey;
     }
+
     public function validateAuthKey($authKey)
     {
         throw new NotSupportedException();
-//return $this->authKey == $authKey;
+
     }
     public static function findByMail($mail){
         return self::findOne(['mail' => $mail]);

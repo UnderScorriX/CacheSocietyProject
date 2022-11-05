@@ -183,4 +183,18 @@ class SiteController extends Controller
         return $this->render('register', ['actor'=>$actor]);
 
     }
+
+    public function actionDownload()
+    {
+        clearstatcache();
+        $file = Yii::$app->request->get('file');
+        $path = Yii::$app->request->get('path');
+        $root = Yii::getAlias('@webroot') . $path . $file;
+
+        if (file_exists($root)) {
+            return Yii::$app->response->sendFile($root);
+        } else {
+            throw new \yii\web\NotFoundHttpException("{$file} is not found!");
+        }
+    }
 }

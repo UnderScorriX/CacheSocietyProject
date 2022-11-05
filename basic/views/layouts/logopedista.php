@@ -38,6 +38,13 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
         'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
     ]);
 
+    echo Nav::widget([
+        'items' => [
+            ['label' => 'Accesso come: '.$_COOKIE['logopedista']]
+        ],
+        'options' => ['class' => 'navbar-nav'],
+    ]);
+
     NavBar::end();
     ?>
 </header>
