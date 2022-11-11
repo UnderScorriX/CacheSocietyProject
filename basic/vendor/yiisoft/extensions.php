@@ -76,13 +76,22 @@ return array (
       '@kartik/time' => $vendorDir . '/kartik-v/yii2-widget-timepicker/src',
     ),
   ),
-  'kartik-v/yii2-widget-fileinput' => 
+  'kartik-v/yii2-sortable-input' => 
   array (
-    'name' => 'kartik-v/yii2-widget-fileinput',
+    'name' => 'kartik-v/yii2-sortable-input',
     'version' => 'dev-master',
     'alias' => 
     array (
-      '@kartik/file' => $vendorDir . '/kartik-v/yii2-widget-fileinput/src',
+      '@kartik/sortinput' => $vendorDir . '/kartik-v/yii2-sortable-input/src',
+    ),
+  ),
+  'kartik-v/yii2-sortable' => 
+  array (
+    'name' => 'kartik-v/yii2-sortable',
+    'version' => '1.2.2.0',
+    'alias' => 
+    array (
+      '@kartik/sortable' => $vendorDir . '/kartik-v/yii2-sortable/src',
     ),
   ),
 );

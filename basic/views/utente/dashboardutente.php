@@ -13,7 +13,12 @@ echo "<h1>Piacere di rivederti, " . $_COOKIE['utente'] . "</h1>";
 <div class="form-group">
 
     <?php
-    echo Html::a('Passa alla schermata per collegare il tuo account ad un caregiver',['vistaassociazionecaregiver']);
+    echo Html::a('Passa alla schermata per collegare il tuo account ad un caregiver',['vistaassociazionecaregiver'], ['class' => 'btn btn-outline-primary']);
+    echo "<br>";
+    echo "<br>";
+    echo Html::a('DEMO esercizio', ['/utente/svolgiesercizio'], ['class' => 'btn btn-outline-primary']);
     ?>
+
+
 
 </div>

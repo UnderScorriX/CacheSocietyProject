@@ -94,8 +94,8 @@
       <excludeFolder url="file://$MODULE_DIR$/basic/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/basic/vendor/psr/http-message" />
       <excludeFolder url="file://$MODULE_DIR$/basic/vendor/kartik-v/yii2-widget-timepicker" />
-      <excludeFolder url="file://$MODULE_DIR$/basic/vendor/kartik-v/yii2-widget-fileinput" />
-      <excludeFolder url="file://$MODULE_DIR$/basic/vendor/kartik-v/bootstrap-fileinput" />
+      <excludeFolder url="file://$MODULE_DIR$/basic/vendor/kartik-v/yii2-sortable" />
+      <excludeFolder url="file://$MODULE_DIR$/basic/vendor/kartik-v/yii2-sortable-input" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -39,8 +39,8 @@ class ComposerStaticInit9098d898fdc84118d85a0258a1ea14d8
         'k' => 
         array (
             'kartik\\time\\' => 12,
-            'kartik\\plugins\\fileinput\\' => 25,
-            'kartik\\file\\' => 12,
+            'kartik\\sortinput\\' => 17,
+            'kartik\\sortable\\' => 16,
             'kartik\\date\\' => 12,
             'kartik\\base\\' => 12,
         ),
@@ -141,13 +141,13 @@ class ComposerStaticInit9098d898fdc84118d85a0258a1ea14d8
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-timepicker/src',
         ),
-        'kartik\\plugins\\fileinput\\' => 
+        'kartik\\sortinput\\' => 
         array (
-            0 => __DIR__ . '/..' . '/kartik-v/bootstrap-fileinput',
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-sortable-input/src',
         ),
-        'kartik\\file\\' => 
+        'kartik\\sortable\\' => 
         array (
-            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-fileinput/src',
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-sortable/src',
         ),
         'kartik\\date\\' => 
         array (
@@ -296,9 +296,9 @@ class ComposerStaticInit9098d898fdc84118d85a0258a1ea14d8
         ),
         'Codeception\\' => 
         array (
-            0 => __DIR__ . '/..' . '/codeception/stub/src',
-            1 => __DIR__ . '/..' . '/codeception/verify/src/Codeception',
-            2 => __DIR__ . '/..' . '/codeception/codeception/src/Codeception',
+            0 => __DIR__ . '/..' . '/codeception/codeception/src/Codeception',
+            1 => __DIR__ . '/..' . '/codeception/stub/src',
+            2 => __DIR__ . '/..' . '/codeception/verify/src/Codeception',
         ),
     );
 
