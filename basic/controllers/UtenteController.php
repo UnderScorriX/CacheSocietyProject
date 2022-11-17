@@ -40,7 +40,7 @@ class UtenteController extends Controller
     }
 
     public function actionSvolgiesercizio(){
-
+    $this -> layout = "utente";
         $data = Yii::$app->request->post();
         if(!empty($data)){
             $model = new SoluzioniModel();
